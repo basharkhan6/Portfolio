@@ -9,8 +9,8 @@ import {PostService} from '../../service/post.service';
 export class HomeComponent implements OnInit {
 
   posts: {
-    title: '',
-    url: ''
+    title: string,
+    url: string,
   } [];
 
   constructor(private postService: PostService) { }
@@ -21,9 +21,9 @@ export class HomeComponent implements OnInit {
 
   getAllPost(): void {
     this.postService.getAllPost().subscribe(
-      data => {
-        this.posts = data.map(post => ({
-          title: post.name.replace('.md', ''),
+      res => {
+        this.posts = res.map(post => ({
+          title: post.name.replace('.html', ''),
           url: post.download_url
         }));
       },
@@ -31,6 +31,10 @@ export class HomeComponent implements OnInit {
         console.log('Error on getting all post', error);
       }
     );
+  }
+
+  getThumbnailUrl(title: string): string {
+    return this.postService.getPostThumbnailUrl(title);
   }
 
 }

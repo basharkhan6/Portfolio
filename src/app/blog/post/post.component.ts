@@ -10,7 +10,7 @@ import {PostService} from '../../service/post.service';
 export class PostComponent implements OnInit {
 
   title: string;
-  content: string;
+  contentHtml: string;
 
   constructor(private route: ActivatedRoute,
               private postService: PostService) { }
@@ -28,14 +28,17 @@ export class PostComponent implements OnInit {
 
   getContent(): void {
     this.postService.getPostFile(this.title).subscribe(
-      post => {
-        this.content = post;
-        console.log(post);
+      res => {
+        this.contentHtml = res;
       },
       error => {
         console.log('Error on getting post content', error);
       }
     );
+  }
+
+  getThumbnailUrl(): string {
+    return this.postService.getPostThumbnailUrl(this.title);
   }
 
 }

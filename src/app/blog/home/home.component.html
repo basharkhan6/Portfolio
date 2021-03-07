@@ -1,7 +1,10 @@
 <a routerLink="../../" class="rounded-lg bg-blue-500 hover:bg-blue-600 border-b-2 border-blue-800 mt-10 p-2">About Me</a>
 <ul>
   <li *ngFor="let p of posts">
-    <a routerLink="../post/{{p.title}}">{{p.title}}</a>
+    <a routerLink="../post/{{p.title}}">
+      <img src="{{getThumbnailUrl(p.title)}}" alt="" width="60px">
+      {{p.title}}
+    </a>
   </li>
 </ul>
 
